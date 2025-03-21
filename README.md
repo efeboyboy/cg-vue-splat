@@ -39,6 +39,7 @@ export default {
 ```vue
 <template>
   <div style="width: 800px; height: 600px;">
+    <!-- Simplified usage - just provide the src! -->
     <GaussianSplat
       src="your-splat-file.splat"
       @loaded="onSplatLoaded"
@@ -62,30 +63,32 @@ export default {
 
 ## Props
 
+All props have sensible defaults, so you only need to specify `src` to get started!
+
 | Prop                          | Type    | Default      | Description                                       |
 | ----------------------------- | ------- | ------------ | ------------------------------------------------- |
 | src                           | String  | Required     | Path to the .splat file                           |
 | position                      | Array   | [0, 0, 0]    | Position of the splat in 3D space [x, y, z]       |
 | rotation                      | Array   | [0, 0, 0, 1] | Quaternion rotation [x, y, z, w]                  |
 | scale                         | Array   | [1, 1, 1]    | Scale of the splat [x, y, z]                      |
-| cameraPosition                | Array   | [0, 0, 3]    | Initial camera position [x, y, z]                 |
+| cameraPosition                | Array   | [0, 0, 5]    | Initial camera position [x, y, z]                 |
 | cameraLookAt                  | Array   | [0, 0, 0]    | Point where the camera is looking at [x, y, z]    |
-| cameraUp                      | Array   | [0, 1, 0]    | Camera up vector [x, y, z]                        |
+| cameraUp                      | Array   | [0, -1, 0]   | Camera up vector [x, y, z]                        |
 | showLoadingUI                 | Boolean | true         | Whether to show loading UI                        |
-| splatAlphaRemovalThreshold    | Number  | 1            | Alpha threshold for splat removal                 |
+| splatAlphaRemovalThreshold    | Number  | 5            | Alpha threshold for splat removal                 |
 | selfDrivenMode                | Boolean | true         | Whether the viewer manages its own rendering loop |
-| gpuAcceleratedSort            | Boolean | true         | Use GPU for splat sorting                         |
+| gpuAcceleratedSort            | Boolean | false        | Use GPU for splat sorting                         |
 | enableSIMDInSort              | Boolean | true         | Use SIMD instructions for sorting where available |
 | sharedMemoryForWorkers        | Boolean | false        | Use shared memory for worker threads              |
 | integerBasedSort              | Boolean | true         | Use integer-based sorting                         |
 | halfPrecisionCovariancesOnGPU | Boolean | false        | Use half precision for covariances on GPU         |
-| antialiased                   | Boolean | false        | Enable antialiasing                               |
+| antialiased                   | Boolean | true         | Enable antialiasing                               |
 | dynamicScene                  | Boolean | false        | Optimize for dynamic scenes                       |
-| progressiveLoad               | Boolean | false        | Enable progressive loading                        |
-| focusDistance                 | Number  | 1.0          | Distance at which the camera is focused           |
+| progressiveLoad               | Boolean | true         | Enable progressive loading                        |
+| focusDistance                 | Number  | 1.2          | Distance at which the camera is focused           |
 | sphericalHarmonicsDegree      | Number  | 0            | Degree of spherical harmonics used (0, 1, or 2)   |
-| maxScreenSpaceSplatSize       | Number  | 1024         | Maximum screen space splat size in pixels         |
-| kernel2DSize                  | Number  | 0.3          | Size of the 2D kernel                             |
+| maxScreenSpaceSplatSize       | Number  | 2048         | Maximum screen space splat size in pixels         |
+| kernel2DSize                  | Number  | 0.5          | Size of the 2D kernel                             |
 
 ## Events
 
