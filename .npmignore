@@ -1,0 +1,14 @@
+.git
+.gitignore
+.gitattributes
+.vscode
+node_modules
+public
+index.html
+src/App.vue
+src/assets
+src/main.js
+src/style.css
+dist/splats/
+dist/splats/*.splat
+dist/vite.svg 
