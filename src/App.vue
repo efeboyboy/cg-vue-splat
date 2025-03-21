@@ -64,6 +64,12 @@
         :selfDrivenMode="true"
         :gpuAcceleratedSort="false"
         :splatAlphaRemovalThreshold="5"
+        :antialiased="true"
+        :focusDistance="1.2"
+        :kernel2DSize="0.5"
+        :progressiveLoad="true"
+        :maxScreenSpaceSplatSize="2048"
+        :sphericalHarmonicsDegree="1"
         @loaded="onSplatLoaded"
         @error="onSplatError"
       />

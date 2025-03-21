@@ -60,7 +60,52 @@
         type: Boolean,
         default: true,
       },
-      // Additional props can be added as needed
+      // Additional optional props based on documentation
+      enableSIMDInSort: {
+        type: Boolean,
+        default: true,
+      },
+      sharedMemoryForWorkers: {
+        type: Boolean,
+        default: false,
+      },
+      integerBasedSort: {
+        type: Boolean,
+        default: true,
+      },
+      halfPrecisionCovariancesOnGPU: {
+        type: Boolean,
+        default: false,
+      },
+      antialiased: {
+        type: Boolean,
+        default: false,
+      },
+      dynamicScene: {
+        type: Boolean,
+        default: false,
+      },
+      progressiveLoad: {
+        type: Boolean,
+        default: false,
+      },
+      focusDistance: {
+        type: Number,
+        default: 1.0,
+      },
+      sphericalHarmonicsDegree: {
+        type: Number,
+        default: 0,
+        validator: (value) => [0, 1, 2].includes(value),
+      },
+      maxScreenSpaceSplatSize: {
+        type: Number,
+        default: 1024,
+      },
+      kernel2DSize: {
+        type: Number,
+        default: 0.3,
+      },
     },
     emits: ["loaded", "error"],
     setup(props, { emit }) {
@@ -99,7 +144,16 @@
             initialCameraLookAt: props.cameraLookAt,
             selfDrivenMode: props.selfDrivenMode,
             gpuAcceleratedSort: props.gpuAcceleratedSort,
-            sharedMemoryForWorkers: false, // Disable SharedArrayBuffer usage for compatibility
+            sharedMemoryForWorkers: props.sharedMemoryForWorkers,
+            enableSIMDInSort: props.enableSIMDInSort,
+            integerBasedSort: props.integerBasedSort,
+            halfPrecisionCovariancesOnGPU: props.halfPrecisionCovariancesOnGPU,
+            antialiased: props.antialiased,
+            dynamicScene: props.dynamicScene,
+            focalAdjustment: props.focusDistance,
+            sphericalHarmonicsDegree: props.sphericalHarmonicsDegree,
+            kernel2DSize: props.kernel2DSize,
+            maxScreenSpaceSplatSize: props.maxScreenSpaceSplatSize,
           });
 
           console.log("Loading splat file:", props.src);
@@ -111,6 +165,7 @@
             position: props.position,
             rotation: props.rotation,
             scale: props.scale,
+            progressiveLoad: props.progressiveLoad,
           });
 
           console.log("Starting viewer");
