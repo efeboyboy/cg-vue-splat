@@ -45,14 +45,6 @@
 
 <template>
   <div class="app">
-    <header>
-      <h1>Bonsai 3D Gaussian Splat</h1>
-      <button v-if="!loadingStarted" class="load-button" @click="loadSplat">
-        Load 3D Model
-      </button>
-      <div v-if="errorMessage" class="header-error">{{ errorMessage }}</div>
-    </header>
-
     <div class="viewer-container">
       <GaussianSplat
         v-if="showSplat"
@@ -73,13 +65,19 @@
         @loaded="onSplatLoaded"
         @error="onSplatError"
       />
+
       <div v-if="!loadingStarted" class="placeholder">
-        Click the "Load 3D Model" button to view the Bonsai
+        <button class="load-button" @click="loadSplat">Load 3D Model</button>
       </div>
+
       <div v-if="isLoading" class="viewer-loading">
         <div class="loader"></div>
         <div>Loading 3D Gaussian Splat...</div>
         <div class="loading-message">This may take a few moments</div>
+      </div>
+
+      <div v-if="errorMessage" class="error-message">
+        {{ errorMessage }}
       </div>
     </div>
   </div>
@@ -101,41 +99,42 @@
   }
 
   .app {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
     width: 100%;
-    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
   }
 
-  header {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-  }
-
-  .header-error {
-    background-color: rgba(204, 0, 0, 0.8);
-    color: white;
-    padding: 8px;
-    border-radius: 4px;
-    margin-top: 10px;
-    display: inline-block;
+  .viewer-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .load-button {
     background-color: #4caf50;
     border: none;
     color: white;
-    padding: 10px 20px;
+    padding: 15px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     margin: 10px 2px;
     cursor: pointer;
     border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .load-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
   }
 
   .placeholder {
@@ -144,17 +143,23 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    color: white;
-    font-size: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
   }
 
-  .viewer-container {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-    background-color: #222;
-    display: flex;
-    min-height: 500px;
+  .error-message {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(204, 0, 0, 0.8);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    z-index: 20;
   }
 
   .loading-message {
@@ -172,11 +177,12 @@
     flex-direction: column;
     color: white;
     gap: 15px;
-    background-color: #222;
+    background-color: rgba(0, 0, 0, 0.7);
     position: absolute;
     top: 0;
     left: 0;
     z-index: 10;
+    font-family: Arial, sans-serif;
   }
 
   .loader {
