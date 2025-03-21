@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import { ref, onMounted, onBeforeUnmount, watch, nextTick } from "vue";
+  import { ref, onMounted, onBeforeUnmount, watch } from "vue";
   import * as GaussianSplats3D from "@mkkellogg/gaussian-splats-3d";
 
   export default {
@@ -33,7 +33,7 @@
       // Camera props
       cameraPosition: {
         type: Array,
-        default: () => [0, 0, 3],
+        default: () => [0, 0, 5],
       },
       cameraLookAt: {
         type: Array,
@@ -41,7 +41,7 @@
       },
       cameraUp: {
         type: Array,
-        default: () => [0, 1, 0],
+        default: () => [0, -1, 0],
       },
       // Viewer options
       showLoadingUI: {
@@ -50,7 +50,7 @@
       },
       splatAlphaRemovalThreshold: {
         type: Number,
-        default: 1,
+        default: 5,
       },
       selfDrivenMode: {
         type: Boolean,
@@ -58,7 +58,7 @@
       },
       gpuAcceleratedSort: {
         type: Boolean,
-        default: true,
+        default: false,
       },
       // Additional optional props based on documentation
       enableSIMDInSort: {
@@ -79,7 +79,7 @@
       },
       antialiased: {
         type: Boolean,
-        default: false,
+        default: true,
       },
       dynamicScene: {
         type: Boolean,
@@ -87,11 +87,11 @@
       },
       progressiveLoad: {
         type: Boolean,
-        default: false,
+        default: true,
       },
       focusDistance: {
         type: Number,
-        default: 1.0,
+        default: 1.2,
       },
       sphericalHarmonicsDegree: {
         type: Number,
@@ -100,11 +100,11 @@
       },
       maxScreenSpaceSplatSize: {
         type: Number,
-        default: 1024,
+        default: 2048,
       },
       kernel2DSize: {
         type: Number,
-        default: 0.3,
+        default: 0.5,
       },
     },
     emits: ["loaded", "error"],
