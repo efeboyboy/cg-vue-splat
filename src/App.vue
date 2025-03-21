@@ -61,7 +61,7 @@
         :kernel2DSize="0.5"
         :progressiveLoad="true"
         :maxScreenSpaceSplatSize="2048"
-        :sphericalHarmonicsDegree="1"
+        :sphericalHarmonicsDegree="0"
         @loaded="onSplatLoaded"
         @error="onSplatError"
       />
