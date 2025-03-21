@@ -57,9 +57,9 @@
       <GaussianSplat
         v-if="showSplat"
         src="/splats/bonsai.splat"
-        :cameraPosition="[0, 1.5, 5]"
+        :cameraPosition="[0, 0, 5]"
         :cameraLookAt="[0, 0, 0]"
-        :cameraUp="[0, 1, 0]"
+        :cameraUp="[0, -1, 0]"
         :showLoadingUI="true"
         :selfDrivenMode="true"
         :gpuAcceleratedSort="false"
