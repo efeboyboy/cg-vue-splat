@@ -33,7 +33,7 @@
       // Camera props
       cameraPosition: {
         type: Array,
-        default: () => [0, 0, 5],
+        default: () => [0, 0, 3],
       },
       cameraLookAt: {
         type: Array,
@@ -42,6 +42,10 @@
       cameraUp: {
         type: Array,
         default: () => [0, -1, 0],
+      },
+      fov: {
+        type: Number,
+        default: 45,
       },
       // Viewer options
       showLoadingUI: {
@@ -106,6 +110,26 @@
         type: Number,
         default: 0.5,
       },
+      autoRotate: {
+        type: Boolean,
+        default: false,
+      },
+      autoRotateSpeed: {
+        type: Number,
+        default: 0.5,
+      },
+      showFps: {
+        type: Boolean,
+        default: false,
+      },
+      responsive: {
+        type: Boolean,
+        default: true,
+      },
+      enableControls: {
+        type: Boolean,
+        default: true,
+      },
     },
     emits: ["loaded", "error"],
     setup(props, { emit }) {
@@ -142,6 +166,7 @@
             cameraUp: props.cameraUp,
             initialCameraPosition: props.cameraPosition,
             initialCameraLookAt: props.cameraLookAt,
+            fov: props.fov,
             selfDrivenMode: props.selfDrivenMode,
             gpuAcceleratedSort: props.gpuAcceleratedSort,
             sharedMemoryForWorkers: props.sharedMemoryForWorkers,
@@ -154,6 +179,11 @@
             sphericalHarmonicsDegree: props.sphericalHarmonicsDegree,
             kernel2DSize: props.kernel2DSize,
             maxScreenSpaceSplatSize: props.maxScreenSpaceSplatSize,
+            autoRotate: props.autoRotate,
+            autoRotateSpeed: props.autoRotateSpeed,
+            showFps: props.showFps,
+            responsive: props.responsive,
+            controls: props.enableControls,
           });
 
           // Ensure the canvas fills the container
