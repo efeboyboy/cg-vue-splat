@@ -1,6 +1,6 @@
 {
   "name": "cg-vue-splat",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Vue 3 wrapper component for GaussianSplats3D rendering library",
   "type": "module",
   "files": [

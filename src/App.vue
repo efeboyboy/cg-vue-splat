@@ -12,8 +12,21 @@
       const errorMessage = ref("");
       const showSplat = ref(false);
       const loadingStarted = ref(false);
+      const useExternalUrl = ref(false);
+      const splatSrc = ref("/splats/bonsai.splat");
 
-      const loadSplat = () => {
+      const loadLocalSplat = () => {
+        splatSrc.value = "/splats/bonsai.splat";
+        useExternalUrl.value = false;
+        isLoading.value = true;
+        showSplat.value = true;
+        loadingStarted.value = true;
+      };
+
+      const loadExternalSplat = () => {
+        splatSrc.value =
+          "https://storage.googleapis.com/reefos-3d/splats/reef-full.splat";
+        useExternalUrl.value = true;
         isLoading.value = true;
         showSplat.value = true;
         loadingStarted.value = true;
@@ -34,8 +47,11 @@
         isLoading,
         errorMessage,
         showSplat,
-        loadSplat,
+        loadLocalSplat,
+        loadExternalSplat,
         loadingStarted,
+        splatSrc,
+        useExternalUrl,
         onSplatLoaded,
         onSplatError,
       };
@@ -48,19 +64,40 @@
     <div class="viewer-container">
       <GaussianSplat
         v-if="showSplat"
-        src="/splats/bonsai.splat"
+        :src="splatSrc"
+        :cameraPosition="[0, 0, 3]"
+        :cameraLookAt="[0, 0, 0]"
+        :cameraUp="[0, -1, 0]"
+        :fov="45"
+        :maxScreenSpaceSplatSize="2048"
+        :selfDrivenMode="true"
+        autoRotate
+        :autoRotateSpeed="0.5"
+        :showFps="true"
+        :responsive="true"
+        :enableControls="true"
         @loaded="onSplatLoaded"
         @error="onSplatError"
       />
 
       <div v-if="!loadingStarted" class="placeholder">
-        <button class="load-button" @click="loadSplat">Load 3D Model</button>
+        <div class="button-container">
+          <button class="load-button" @click="loadLocalSplat">
+            Load Local 3D Model
+          </button>
+          <button class="load-button external" @click="loadExternalSplat">
+            Load External 3D Model
+          </button>
+        </div>
       </div>
 
       <div v-if="isLoading" class="viewer-loading">
         <div class="loader"></div>
         <div>Loading 3D Gaussian Splat...</div>
         <div class="loading-message">This may take a few moments</div>
+        <div v-if="useExternalUrl" class="loading-message note">
+          Note: External URLs require proper CORS headers
+        </div>
       </div>
 
       <div v-if="errorMessage" class="error-message">
@@ -102,6 +139,12 @@
     align-items: center;
   }
 
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
   .load-button {
     background-color: #4caf50;
     border: none;
@@ -122,6 +165,14 @@
     background-color: #45a049;
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .load-button.external {
+    background-color: #2196f3;
+  }
+
+  .load-button.external:hover {
+    background-color: #0b7dda;
   }
 
   .placeholder {
@@ -153,6 +204,11 @@
     margin-top: 10px;
     font-size: 14px;
     opacity: 0.8;
+  }
+
+  .loading-message.note {
+    color: #ffeb3b;
+    font-style: italic;
   }
 
   .viewer-loading {
