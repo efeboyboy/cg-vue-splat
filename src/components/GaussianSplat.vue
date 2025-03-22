@@ -195,8 +195,11 @@
 
           console.log("Loading splat file:", props.src);
 
+          // Handle both local and remote URLs
+          const splatSrc = props.src;
+
           // Load the splat file using the correct API method
-          await viewer.addSplatScene(props.src, {
+          await viewer.addSplatScene(splatSrc, {
             splatAlphaRemovalThreshold: props.splatAlphaRemovalThreshold,
             showLoadingUI: props.showLoadingUI,
             position: props.position,
