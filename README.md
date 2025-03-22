@@ -73,7 +73,7 @@ All props have sensible defaults, so you only need to specify `src` to get start
 | scale                         | Array   | [1, 1, 1]    | Scale of the splat [x, y, z]                      |
 | cameraPosition                | Array   | [0, 0, 5]    | Initial camera position [x, y, z]                 |
 | cameraLookAt                  | Array   | [0, 0, 0]    | Point where the camera is looking at [x, y, z]    |
-| cameraUp                      | Array   | [0, -1, 0]   | Camera up vector [x, y, z]                        |
+| cameraUp                      | Array   | [0, 1, 0]    | Camera up vector [x, y, z]                        |
 | showLoadingUI                 | Boolean | true         | Whether to show loading UI                        |
 | splatAlphaRemovalThreshold    | Number  | 5            | Alpha threshold for splat removal                 |
 | selfDrivenMode                | Boolean | true         | Whether the viewer manages its own rendering loop |
