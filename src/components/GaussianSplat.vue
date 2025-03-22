@@ -156,6 +156,13 @@
             maxScreenSpaceSplatSize: props.maxScreenSpaceSplatSize,
           });
 
+          // Ensure the canvas fills the container
+          if (viewer.threeRenderer && viewer.threeRenderer.domElement) {
+            viewer.threeRenderer.domElement.style.width = "100%";
+            viewer.threeRenderer.domElement.style.height = "100%";
+            viewer.threeRenderer.domElement.style.display = "block";
+          }
+
           console.log("Loading splat file:", props.src);
 
           // Load the splat file using the correct API method
@@ -207,15 +214,34 @@
         }
       };
 
+      let resizeObserver = null;
+
       // Initialize on mount
       onMounted(() => {
         console.log("Component mounted, initializing viewer");
         // Use a delay to ensure the DOM is fully mounted
         setTimeout(initViewer, 300);
+
+        // Add resize observer to handle container resizing
+        resizeObserver = new ResizeObserver(() => {
+          if (viewer && viewer.threeRenderer) {
+            const width = containerWrapper.value.clientWidth;
+            const height = containerWrapper.value.clientHeight;
+            viewer.setSize(width, height);
+          }
+        });
+
+        if (containerWrapper.value) {
+          resizeObserver.observe(containerWrapper.value);
+        }
       });
 
       // Clean up on unmount
       onBeforeUnmount(() => {
+        if (resizeObserver) {
+          resizeObserver.disconnect();
+          resizeObserver = null;
+        }
         cleanupViewer();
       });
 
@@ -287,9 +313,12 @@
   .gaussian-splat-container {
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     overflow: hidden;
-    min-height: 400px;
     display: block;
   }
 
