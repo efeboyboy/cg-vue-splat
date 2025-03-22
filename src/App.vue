@@ -86,8 +86,8 @@
   }
 
   .app {
-    width: 60%;
-    height: 80vh;
+    width: 100%;
+    height: 100vh;
     overflow: hidden;
   }
 

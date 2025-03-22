@@ -156,3 +156,22 @@ This component is built on top of the [Gaussian Splats 3D library](https://githu
 ## License
 
 MIT
+
+## Changelog
+
+### v0.2.2
+
+- Fixed container sizing issue: The component now automatically fills its parent container completely
+- Added ResizeObserver to handle container size changes dynamically
+
+### v0.2.1
+
+- Previous stable release
+
+### v0.1.4
+
+- Initial packaging improvements
+
+### v0.1.3
+
+- Initial public release
