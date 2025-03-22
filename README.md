@@ -2,6 +2,10 @@
 
 A Vue 3 component wrapper for the [@mkkellogg/gaussian-splats-3d](https://github.com/mkkellogg/GaussianSplats3D) library, making it easy to integrate 3D Gaussian Splat rendering in your Vue applications.
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Online-brightgreen)](https://cg-vue-splat.vercel.app)
+[![NPM](https://img.shields.io/npm/v/cg-vue-splat.svg)](https://www.npmjs.com/package/cg-vue-splat)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 ## Installation
 
 ```bash
@@ -232,6 +236,20 @@ This component is built on top of the [Gaussian Splats 3D library](https://githu
 MIT
 
 ## Changelog
+
+### v0.2.6
+
+- Added back button to return to model selection screen
+- Enhanced error handling with a Go Back button
+- Refined demo UI with improved button styles and interactions
+
+### v0.2.5
+
+- Added live demo site at [cg-vue-splat.vercel.app](https://cg-vue-splat.vercel.app)
+- Improved UI with dark theme and better visual design
+- Updated favicon to match the dark theme
+- Enhanced demo page with responsive layout and better user experience
+- Fixed deployment issues to Vercel
 
 ### v0.2.4
 
